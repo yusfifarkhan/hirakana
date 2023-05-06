@@ -1,0 +1,16 @@
+.mainSection,
+.dakutenSection,
+.combiSection {
+    display: flex;
+    align-items: flex-start;
+}
+
+#kanaCard {
+    flex-basis: 20%;
+    padding: 12px;
+}
+
+#combiCard {
+    flex-basis: calc(100% / 3);
+    padding: 12px;
+}

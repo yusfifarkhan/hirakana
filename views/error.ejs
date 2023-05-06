@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hirakana</title>
+  <!-- CSS Settings -->
+  <%- include('partials/_meta_head') %>
+  <link rel="stylesheet" href="css/error.css">
+</head>
+
+<body>
+  <div class="container my-5">
+    <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
+
+      <h1 class="text-body-emphasis"><i class="fa-solid fa-file-circle-question"></i> Error 404</h1>
+      <p class="col-lg-6 mx-auto mb-4">
+        You've been redirected here because we couldn't <br> find the page you were looking for. <br>
+      </p>
+      <a href="/" class="btn btn-primary px-5 mb-5">
+        <i class="fa-solid fa-house-chimney"></i>
+        Return To Homepage
+      </a>
+    </div>
+  </div>
+
+  <!-- JS Settings -->
+  <%- include('partials/_meta_foot') %>
+</body>
+
+</html>

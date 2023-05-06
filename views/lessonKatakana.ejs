@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hirakana - <%= pageTitle %></title>
+  <!-- Global CSS Settings -->
+  <%- include('partials/_meta_head') %>
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+  <!-- Home Page CSS -->
+  <link rel="stylesheet" href="../css/lesson.css">
+</head>
+
+<body>
+  <header>
+    <%- include('partials/_navbar') %>
+  </header>
+  <main>
+    <section class="container py-5" id="container-hiragana" data-selected="main">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="hiraganaMenu">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" id="nvMain">Main (Gojuuon)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nvDakuten">Dakuten (Dakuon)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nvCombi">Combi (Youon)</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="container" id="viewPlayerHiragana">
+            <% const {main, dakuten, combinations} = data.katakana;  %>
+            <% 
+            const mainSound = data.hiragana.main;
+            const dakutenSound = data.hiragana.dakuten;
+            const combiSound = data.hiragana.combinations;
+             %>
+            <div class="row" id="mainSection">
+              <div class="col-12 h3 mb-4">
+                Main (Gojuuon)
+              </div>
+              <% for( let index = 0; index < main.length; index++ ) { %>
+              <article id="kanaCard">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <img src="../animation/katakana/<%=main[index].kana%>.gif" class="" alt="<%= main[index].kana%>">
+                    </h5>
+                    <p class="card-text">
+                    <div class="table rounded-md">
+                      <table class="table table-primary">
+                        <tbody>
+                          <tr>
+                            <td>Kana:</td>
+                            <td><%= main[index].kana; %></td>
+                          </tr>
+                          <tr>
+                            <td>Roumaji:</td>
+                            <td><%= main[index].roumaji; %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </p>
+                    <div class="container">
+                      <button class="btn btn-primary col btn-play-male" data-sound="<%= mainSound[index].kana %>">
+                        <i class="fa-solid fa-person"></i>&nbsp;
+                        <i class="fa-solid fa-volume-high"></i>
+                      </button>
+                      <button class="btn btn-primary col btn-play-female" data-sound="<%= mainSound[index].kana %>">
+                        <i class="fa-solid fa-person-dress"></i>&nbsp;
+                        <i class="fa-solid fa-volume-high"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            </div>
+            <div class="row d-none" id="dakutenSection">
+              <div class="col-12 h3 mb-4">
+                Dakuten (Dakuon)
+              </div>
+              <% for( let index = 0; index < dakuten.length; index++ ) { %>
+              <article id="kanaCard">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <img src="../animation/katakana/<%=dakuten[index].kana%>.gif" class=""
+                        alt="<%= dakuten[index].kana%>">
+                    </h5>
+                    <p class="card-text">
+                    <div class="table rounded-md">
+                      <table class="table table-primary">
+                        <tbody>
+                          <tr>
+                            <td>Kana:</td>
+                            <td><%= dakuten[index].kana; %></td>
+                          </tr>
+                          <tr>
+                            <td>Roumaji:</td>
+                            <td><%= dakuten[index].roumaji; %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </p>
+                    <div class="container">
+                      <button class="btn btn-primary col btn-play-male" data-sound="<%= dakutenSound[index].kana %>">
+                        <i class="fa-solid fa-person"></i>&nbsp;
+                        <i class="fa-solid fa-volume-high"></i>
+                      </button>
+                      <button class="btn btn-primary col btn-play-female" data-sound="<%= dakutenSound[index].kana %>">
+                        <i class="fa-solid fa-person-dress"></i>&nbsp;
+                        <i class="fa-solid fa-volume-high"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            </div>
+            <div class="row d-none" id="combiSection">
+              <div class="col-12 h3 mb-4">
+                Combinations (Youon)
+              </div>
+              <% for( let index = 0; index < combinations.length; index++ ) { %>
+              <article id="combiCard">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <img src="../animation/katakana/<%=combinations[index].kana%>.gif" class="img-fluid rounded"
+                        alt="<%= combinations[index].kana%>">
+                    </h5>
+                    <p class="card-text">
+                    <div class="table rounded-md">
+                      <table class="table table-primary">
+                        <tbody>
+                          <tr>
+                            <td>Kana:</td>
+                            <td><%= combinations[index].kana; %></td>
+                          </tr>
+                          <tr>
+                            <td>Roumaji:</td>
+                            <td><%= combinations[index].roumaji; %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </p>
+                    <div class="container">
+                      <button class="btn btn-primary col btn-play-male" data-sound="<%= combiSound[index].kana %>">
+                        <i class="fa-solid fa-person"></i>&nbsp;
+                        <i class="fa-solid fa-volume-high"></i>
+                      </button>
+                      <button class="btn btn-primary col btn-play-female" data-sound="<%= combiSound[index].kana %>">
+                        <i class="fa-solid fa-person-dress"></i>&nbsp;
+                        <i class="fa-solid fa-volume-high"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer>
+    <%- include('partials/_footer') %>
+  </footer>
+  <!-- Global JS Settings -->
+  <%- include('partials/_meta_foot') %>
+  <!-- Katakana Lesson Script -->
+  <script>
+
+    // Katakana Main Container
+    let hiraganaLessonContainer = document.getElementById("container-hiragana");
+
+    // Katakana Lesson Menu
+    let navHeader = document.getElementById("hiraganaMenu");
+    let navBtns = navHeader.getElementsByClassName("nav-link");
+    for (let i = 0; i < navBtns.length; i++) {
+      navBtns[i].addEventListener("click", (e) => {
+        let current = navHeader.getElementsByClassName("active");
+        if (current.length > 0) {
+          current[0].className = current[0].className.replace(" active", "");
+        }
+        e.target.classList += " active";
+        const shown = e.target.id.replace("nv", "").toLowerCase(0);
+        hiraganaLessonContainer.dataset.selected = shown;
+        setCurrentView(shown)
+      });
+    }
+
+    const setCurrentView = (selected) => {
+      const viewHiragana = document.getElementById("viewPlayerHiragana");
+      const viewSections = viewHiragana.getElementsByClassName("row");
+      for (let index = 0; index < viewSections.length; index++) {
+        if (viewSections[index].id !== `${selected}Section`) {
+          viewSections[index].classList.add("d-none");
+        } else {
+          viewSections[index].classList.remove("d-none")
+        }
+      }
+    };
+
+    const btnsPlayMale = document.querySelectorAll(".btn-play-male");
+    btnsPlayMale.forEach(button => {
+      button.addEventListener('click', (e) => {
+        playKanaSound(button.dataset.sound, "m");
+      });
+    });
+
+    const btnsPlayFemale = document.querySelectorAll(".btn-play-female");
+    btnsPlayFemale.forEach(button => {
+      button.addEventListener('click', (e) => {
+        playKanaSound(button.dataset.sound, "f");
+      });
+    });
+
+    const playKanaSound = (selectedSound, audioType) => {
+      let kanasound = ""
+      audioType === "m" ?
+        kanasound = new Audio(`../audio/male/${selectedSound}.mp3`)
+        : kanasound = new Audio(`../audio/female/${selectedSound}.mp3`);
+      kanasound.currentTime = 0;
+      kanasound.play();
+    };
+  </script>
+</body>
+
+</html>

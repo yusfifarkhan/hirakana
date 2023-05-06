@@ -1,0 +1,80 @@
+#jumbotron,
+#reviews {
+  font-family: 'Poppins', sans-serif;
+}
+
+#jumbotron {
+  line-height: 2;
+}
+
+#jumbotron>#main {
+  height: 22.6rem;
+  background-image: url('/img/stacked-waves-haikei.svg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#mainDisplay {
+  position: relative;
+  top: -3rem;
+}
+
+#optionLesson {
+  background-color: var(--primary-500);
+  color: var(--white);
+}
+
+#optionQuiz {
+  background-color: var(--complementary-500);
+  color: var(--white);
+}
+
+#reviews {
+  line-height: 1.8;
+}
+
+#feedback {
+  background-color: var(--complementary-500);
+  border-top: 8px solid var(--secondary-500);
+  margin-top: 8rem;
+  margin-bottom: 0px;
+  line-height: 1.8;
+}
+
+#icon-round {
+  border-radius: 50%;
+}
+
+.form-range {
+  background-color: white;
+  padding: 1rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.nav-item:hover {
+  font-weight: bolder;
+}
+
+.modal-header {
+  background-color: var(--complementary-300);
+}
+
+.modal-content {
+  border-bottom: 4px solid var(--complementary-300);
+}
+
+
+@media only screen and (max-width: 992px) {
+  #jumbotron>#main {
+    height: 25rem;
+  }
+}
+
+@media only screen and (max-width: 765px) {
+  #mainDisplay {
+    display: none;
+  }
+}

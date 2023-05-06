@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hirakana - <%= pageTitle %></title>
+  <!-- Global CSS Settings -->
+  <%- include('partials/_meta_head') %>
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+  <!-- Home Page CSS -->
+  <link rel="stylesheet" href="../css/quiz.css">
+</head>
+
+<body>
+  <header>
+    <%- include('partials/_navbar') %>
+  </header>
+  <main>
+    <section class="container py-5" id="container-quiz" data-selected="main">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3 class="py-3">Hiragana Practice</h3>
+          <ul class="nav nav-tabs card-header-tabs" id="quizMenu">
+            <li class="nav-item ">
+              <a class="nav-link active" href="#main" id="nvMain">Main</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#dakuten" id="nvDakuten">Dakuten</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#combi" id="nvCombi">Combi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#score" id="nvTotal">Totals Score</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <% 
+            function shuffle(array) {
+            let currentIndex = array.length,  randomIndex;
+            while (currentIndex != 0) {
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex--;
+              [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+            }
+            return array;
+          } %>
+          <div class="container" id="viewPlayerQuiz">
+            <% const {main, dakuten, combinations} = data.katakana;  %>
+            <% const shuffledMain = shuffle(new Array(...main));  %>
+            <% const shuffledDakuten = shuffle(new Array(...dakuten));  %>
+            <% const shuffledCombi =shuffle(new Array(...combinations));  %>
+            <div class="row" id="mainSection">
+              <div class="col-12 h3 mb-4">
+                Main (Gojuuon)
+              </div>
+              <% for( let index = 0; index < shuffledMain.length; index++ ) { %>
+              <article id="kanaCard">
+                <div class="card position-relative">
+                  <div class="card-body">
+                    <div class="card-title">
+                      <%= shuffledMain[index].kana %>
+                    </div>
+                    <div class="card-form">
+                      <input type="text" name="#" id="#" class="form-control text-center fm-answer"
+                        data-key="<%= shuffledMain[index].roumaji %>" data-kana="<%= shuffledMain[index].kana %>">
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            </div>
+            <div class="row d-none" id="dakutenSection">
+              <div class="col-12 h3 mb-4">
+                Dakuten (Dakuon)
+              </div>
+              <% for( let index = 0; index < shuffledDakuten.length; index++ ) { %>
+              <article id="kanaCard">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="card-title">
+                      <%= shuffledDakuten[index].kana %>
+                    </div>
+                    <div class="card-form">
+                      <input type="text" name="#" id="#" class="form-control text-center fm-answer"
+                        data-key="<%= shuffledDakuten[index].roumaji %>" data-kana="<%= shuffledDakuten[index].kana %>">
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            </div>
+            <div class="row d-none" id="combiSection">
+              <div class="col-12 h3 mb-4">
+                Combinations (Youon)
+              </div>
+              <% for( let index = 0; index < shuffledCombi.length; index++ ) { %>
+              <article id="combiCard">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="card-title">
+                      <%= shuffledCombi[index].kana %>
+                    </div>
+                    <div class="card-form">
+                      <input type="text" name="#" id="#" class="form-control text-center fm-answer"
+                        data-key="<%= shuffledCombi[index].roumaji %>" data-kana="<%= shuffledCombi[index].kana %>">
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            </div>
+            <div class="row d-none" id="totalSection">
+              <div class="col-lg-4 col-12" id="totalMainSection">
+                <div class="d-flex py-3 justify-content-between">
+                  <div class="fs-5 fw-bold">
+                    Main
+                  </div>
+                  <div class="scoreMain">
+                    0.00%
+                  </div>
+                </div>
+                <% for( let globalIndex = 0; globalIndex < main.length; globalIndex++ ) { %>
+                <% if (globalIndex%5==0 && globalIndex<=6*5) { %>
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <% for( let index = 0; index < main.slice(globalIndex, globalIndex+5).length; index++ ) { %>
+                      <th><%= main[index+globalIndex].kana %></th>
+                      <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <% for( let index = 0; index < main.slice(globalIndex, globalIndex+5).length; index++ ) { %>
+                      <td class="sc-main sc-<%= main[index+globalIndex].kana %>">...</td>
+                      <% } %>
+                    </tr>
+                  </tbody>
+                </table>
+                <% } %>
+                <% if (globalIndex%5==0 && globalIndex>=6*5 && globalIndex<(6*5)+3 ) { %>
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <% for( let index = 0; index < main.slice(globalIndex, globalIndex+3).length; index++ ) { %>
+                      <th><%= main[index+globalIndex+5].kana %></th>
+                      <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <% for( let index = 0; index < main.slice(globalIndex, globalIndex+3).length; index++ ) { %>
+                      <td class="sc-main sc-<%= main[index+globalIndex+5].kana %>">...</td>
+                      <% } %>
+                    </tr>
+                  </tbody>
+                </table>
+                <% } %>
+                <% if (globalIndex%5==0 && globalIndex>(6*5)+3) { %>
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <% for( let index = 0; index < main.slice(globalIndex+3, globalIndex+5+3).length; index++ ) { %>
+                      <th><%= main[index+globalIndex+3].kana %></th>
+                      <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <% for( let index = 0; index < main.slice(globalIndex+3, globalIndex+5+3).length; index++ ) { %>
+                      <td class="sc-main sc-<%= main[index+globalIndex+3].kana %>">...</td>
+                      <% } %>
+                    </tr>
+                  </tbody>
+                </table>
+                <% } %>
+                <% } %>
+                </table>
+              </div>
+              <div class="col-lg-4 col-12">
+                <div class="d-flex py-3 justify-content-between">
+                  <div class="fs-5 fw-bold">
+                    Dakuten
+                  </div>
+                  <div class="scoreDaku">
+                    0.00%
+                  </div>
+                </div>
+                <% for( let globalIndex = 0; globalIndex < dakuten.length; globalIndex++ ) { %>
+                <% if (globalIndex%5==0) { %>
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <% for( let index = 0; index < dakuten.slice(globalIndex, globalIndex+5).length; index++ ) { %>
+                      <th><%= dakuten[index+globalIndex].kana %></th>
+                      <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <% for( let index = 0; index < dakuten.slice(globalIndex, globalIndex+5).length; index++ ) { %>
+                      <td class="sc-dakuten sc-<%= dakuten[index+globalIndex].kana %>">...</td>
+                      <% } %>
+                    </tr>
+                  </tbody>
+                </table>
+                <% } %>
+                <% } %>
+              </div>
+              <div class="col-lg-4 col-12">
+                <div class="d-flex py-3 justify-content-between">
+                  <div class="fs-5 fw-bold">
+                    Combinations
+                  </div>
+                  <div class="scoreCombi">
+                    0.00%
+                  </div>
+                </div>
+                <% for( let globalIndex = 0; globalIndex < combinations.length; globalIndex++ ) { %>
+                <% if (globalIndex%3==0) { %>
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <% for( let index = 0; index < combinations.slice(globalIndex, globalIndex+3).length; index++ ) { %>
+                      <th><%= combinations[index+globalIndex].kana %></th>
+                      <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <% for( let index = 0; index < combinations.slice(globalIndex, globalIndex+3).length; index++ ) { %>
+                      <td class="sc-combi sc-<%= combinations[index+globalIndex].kana %>">...</td>
+                      <% } %>
+                    </tr>
+                  </tbody>
+                </table>
+                <% } %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer>
+    <%- include('partials/_footer') %>
+  </footer>
+  <!-- Global JS Settings -->
+  <%- include('partials/_meta_foot') %>
+  <!-- Hiragana QuizScript -->
+  <script>
+    // Hiragana Main Container
+    let hiraganaLessonContainer = document.getElementById("container-quiz");
+
+    // Hiragana Lesson Menu
+    let navHeader = document.getElementById("quizMenu");
+    let navBtns = navHeader.getElementsByClassName("nav-link");
+    for (let i = 0; i < navBtns.length; i++) {
+      navBtns[i].addEventListener("click", (e) => {
+        let current = navHeader.getElementsByClassName("active");
+        if (current.length > 0) {
+          current[0].className = current[0].className.replace(" active", "");
+        }
+        e.target.classList += " active";
+        const shown = e.target.id.replace("nv", "").toLowerCase(0);
+        hiraganaLessonContainer.dataset.selected = shown;
+        setCurrentView(shown)
+      });
+    }
+
+    const setCurrentView = (selected) => {
+      const viewHiragana = document.getElementById("viewPlayerQuiz");
+      const viewSections = viewHiragana.getElementsByClassName("row");
+      for (let index = 0; index < viewSections.length; index++) {
+        if (viewSections[index].id !== `${selected}Section`) {
+          viewSections[index].classList.add("d-none");
+        } else {
+          viewSections[index].classList.remove("d-none")
+        }
+      }
+    };
+
+    // Form Quiz Logic
+
+    const formAnswerQuiz = document.querySelectorAll(".fm-answer");
+    const answeredWrong = [];
+    const answeredRight = [];
+
+    formAnswerQuiz.forEach(element => {
+      const { key, kana } = element.dataset;
+      element.addEventListener('focusout', (e) => {
+        const userAnswer = e.target.value.toLowerCase();
+        userAnswer !== ""
+          ? userAnswer === key
+            ? userIsRight(true, kana, userAnswer, element)
+            : userIsRight(false, kana, userAnswer, element)
+          : null
+      });
+    });
+
+    const userIsRight = (isCorrect, key, answer, element) => {
+      isCorrect ? (() => {
+        answeredRight.push({ key: key, userAnswer: answer })
+        updateScoreSheet(element, "right")
+
+      })() : (() => {
+        answeredWrong.push({ key: key, userAnswer: answer })
+        updateScoreSheet(element, "wrong")
+      })()
+    };
+
+    const updateScoreSheet = (element, conditon) => {
+      conditon === "right"
+        ? (() => {
+          element.classList.remove("wrong-answer")
+          element.classList.add("right-answer")
+          element.disabled = true;
+          element.parentElement.parentElement.parentElement.classList.remove("wrong");
+          element.parentElement.parentElement.parentElement.classList.add("right");
+        })() : (() => {
+          element.classList.remove("right-answer")
+          element.classList.add("wrong-answer")
+          element.parentElement.parentElement.parentElement.classList.remove("right");
+          element.parentElement.parentElement.parentElement.classList.add("wrong");
+        })()
+      checkScore();
+    };
+
+    const checkScore = () => {
+      const all = [
+        ...JSON.parse('<%-JSON.stringify(main)%>'),
+        ...JSON.parse('<%-JSON.stringify(dakuten)%>'),
+        ...JSON.parse('<%-JSON.stringify(combinations)%>')
+      ];
+
+      const rightsTotal = answeredRight.filter((obj, index) => {
+        return index === answeredRight.findIndex((o) => {
+          return o.key === obj.key && o.userAnswer === obj.userAnswer;
+        });
+      });
+
+      const wrongsTotal = answeredWrong.reduce((acc, curr) => {
+        acc[curr.key] = (acc[curr.key] || 0) + 1;
+        return acc;
+      }, {});
+
+      console.log(rightsTotal);
+      console.log(wrongsTotal);
+
+      for (const item of all) {
+        const { kana } = item;
+        const score = document.querySelector(`.sc-${kana}`);
+
+        let wrongAttemptsTotal = "..."
+        for (const key in wrongsTotal) {
+          if (Object.hasOwnProperty.call(wrongsTotal, key)) {
+            if (key === kana)
+              wrongAttemptsTotal = wrongsTotal[key]
+          }
+        }
+
+        if (wrongAttemptsTotal === "...") {
+          for (const firstTry of answeredRight) {
+            if (firstTry.key === kana) {
+              score.innerHTML = `O`;
+            }
+          }
+        } else {
+          score.innerHTML = `${wrongAttemptsTotal}x`;
+        }
+      }
+
+      updateScorePercentage();
+
+    };
+
+    const updateScorePercentage = () => {
+      const sbMain = document.getElementsByClassName("sc-main");
+      const sbDakuten = document.querySelectorAll(".sc-dakuten");
+      const sbCombi = document.querySelectorAll(".sc-combi");
+
+      let mainSectionRight = 0;
+      for (const sbItem of sbMain) {
+        if (sbItem.innerHTML.toLowerCase() === 'o') {
+          mainSectionRight += 1;
+        }
+      }
+      let dakutSectionRight = 0;
+      for (const sbItem of sbDakuten) {
+        if (sbItem.innerHTML.toLowerCase() === 'o') {
+          dakutSectionRight += 1;
+        }
+      }
+      let combiSectionRight = 0;
+      for (const sbItem of sbCombi) {
+        if (sbItem.innerHTML.toLowerCase() === 'o') {
+          combiSectionRight += 1;
+        }
+      }
+
+      const round = (num) => {
+        return num.toFixed(2) + "%";
+      }
+
+      document.querySelector('.scoreMain').innerHTML = round((mainSectionRight / sbMain.length) * 100);
+      document.querySelector('.scoreDaku').innerHTML = round((dakutSectionRight / sbDakuten.length) * 100);
+      document.querySelector('.scoreCombi').innerHTML = round((combiSectionRight / sbCombi.length) * 100);
+    }
+  </script>
+</body>
+
+</html>

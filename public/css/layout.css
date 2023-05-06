@@ -1,0 +1,37 @@
+/* Navbar Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
+
+/* Jumbotron Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-700: #8a0027;
+    --primary-500: #c31d39;
+    --primary-300: #d7495d;
+    --secondary-700: #a1451c;
+    --secondary-500: #dc8124;
+    --secondary-300: #e9b960;
+    --complementary-700: #162a55;
+    --complementary-500: #1d54c3;
+    --complementary-300: #2075f0;
+    --tetradic-700: #207813;
+    --tetradic-500: #39c31d;
+    --tetradic-300: #83ec6a;
+
+    --black: #000000;
+    --white: #ffffff;
+}
+
+main {
+    min-height: 87vh;
+}
+
+.img-logo {
+    width: 32px;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: var(--complementary-700);
+    color: var(--white);
+}

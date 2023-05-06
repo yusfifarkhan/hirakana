@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hirakana - <%= pageTitle %></title>
+  <!-- Global CSS Settings -->
+  <%- include('partials/_meta_head') %>
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <!-- Home Page CSS -->
+  <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+  <header>
+    <%- include('partials/_navbar') %>
+  </header>
+  <main>
+    <!-- Jumbotron Section -->
+    <section id="jumbotron">
+      <div class="p-5 mb-2 text-light" id="main">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-md-8" id="mainText">
+              <h1 class="display-5 fw-bold">Hirakana</h1>
+              <p class="fs-4">
+                Memorising kana has never been easier than before.
+              </p>
+              <a class="btn btn-outline-light btn-lg" href="#option">
+                Start Now &nbsp;
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="col-md-4" id="mainDisplay">
+              <img src="img/display-image.png" class="img-fluid rounded-top" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-5 mb-2 " id="option">
+        <div class="container mx-3 mt-5">
+          <div class="row align-items-md-stretch g-5">
+            <div class="col-md-6">
+              <div class="h-100 p-5 border rounded-3" id="optionLesson">
+                <h2>Kana Lesson</h2>
+                <p class="text-justify">
+                  Are you ready to embark on a thrilling journey into the world of Japanese language and culture? <br>
+                  Join
+                  us for an exciting adventure as we explore the magical realm of Japanese Alphabet!
+                </p>
+                <a href="/learn/hiragana" class="btn btn-outline-light w-100">Learn Hiragana</a>
+                <hr>
+                <a href="/learn/katakana" class="btn btn-outline-light w-100">Learn Katakana</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 border rounded-3" id="optionQuiz">
+                <h2>Kana Quiz</h2>
+                <p>
+                  Are you up for a challenge that will put your Hiragana and Katakana skills to the test? <br>
+                  Join us for an exciting quiz that will have you reading and writing like a pro in no time!
+                </p>
+                <br>
+                <!-- Modal trigger button -->
+                <button type="button" class="btn btn-outline-light w-100" data-bs-toggle="modal"
+                  data-bs-target="#modalId">
+                  Start Quiz
+                </button>
+
+                <!-- Modal Body -->
+                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Start Quiz</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-dark">
+                        <div class="container py-2">
+                          <p class="text-center py-2">
+                            Select Hiragana or Katakana to begin quiz!
+                          </p>
+                          <div class="d-grid gap-2">
+                            <a href="/quiz/hiragana" class="btn btn-primary"> <em>あ</em> Hiragana Quiz</a>
+                            <a href="/quiz/katakana" class="btn btn-primary"> <em>ア</em> Katakana Quiz</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="p-5 mb-2" id="reviews">
+      <div class="container pt-5 mb-4">
+        <h2 class="text-center mx-3 mt-4">User Reviews</h2>
+        <div class="row py-5 g-4 row-cols-1 row-cols-lg-3" id="reviewItems">
+          <% for( let i = 0; i < data.appReviews.slice(0,3).length; i++ ) { %>
+          <div class="col d-flex align-items-start">
+            <div
+              class="icon-round rounded-circle text-bg-primary p-2 d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <h4 class="pb-3"><%= data.appReviews[i].name %></h4>
+              <p class="pb-3">
+                <%= data.appReviews[i].review %>
+              </p>
+              <div class="d-flex">
+                <% for( let rate = 0; rate < Math.round(data.appReviews[i].rating * 2) / 2; rate++ ) { %>
+                <i class="fa-solid fa-star-half-stroke fa-beat" style="color: #c31d39;"></i>&nbsp;
+                <% } %>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+        <div class="row row-cols-1">
+          <div class="collapse col" id="moreReviewItems">
+            <div class="row py-5 g-4 row-cols-1 row-cols-lg-3" id="reviewItems">
+              <% let moreReviews = data.appReviews.slice(3, data.appReviews.length).splice(0, 6) %>
+              <% for( let i = 0; i < moreReviews.length; i++ ) { %>
+              <div class="col d-flex align-items-start">
+                <div
+                  class="icon-round rounded-circle text-bg-primary p-2 d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div>
+                  <h4 class="pb-3"><%= moreReviews[i].name %></h4>
+                  <p class="pb-3">
+                    <%= moreReviews[i].review %>
+                  </p>
+                  <div class="d-flex">
+                    <% for( let rate = 0; rate < Math.round(moreReviews[i].rating * 2) / 2; rate++ ) { %>
+                    <i class="fa-solid fa-star-half-stroke fa-beat" style="color: #c31d39;"></i>&nbsp;
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="col">
+            <button class="btn btn-outline-danger w-100" type="button" data-bs-toggle="collapse"
+              data-bs-target="#moreReviewItems" aria-expanded="false" aria-controls="moreReviewItems">
+              More Reviews
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Feedback Section -->
+    <section id="feedback">
+      <div class="container pt-5 pb-5 text-white">
+        <h3 class="offset-md-4 fs-3 pb-3">&nbsp;Feedback</h3>
+        <form action="/" method="post">
+          <div class="mb-3 row">
+            <label for="ifName" class="col-12 col-md-4 col-form-label fw-bold">Name</label>
+            <div class="col-12 col-md-8">
+              <input type="text" class="form-control" name="ifName" id="ifName" placeholder="Full name" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="ifRating" class="col-12 col-md-4 col-form-label fw-bold">Rating</label>
+            <div class="col-12 col-md-8 row">
+              <div class="col">
+                <input type="range" class="form-range" name="ifRating" id="ifRating" value="1" min="1" max="5" required
+                  oninput="hReviewSlider(event)">
+              </div>
+              <div class="col">
+                <output id="ofRating">
+                  <i class="fa-solid fa-star-half-stroke fa-beat" style="color: var(--white);"></i>
+                </output>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="ifReview" class="col-12 col-md-4 col-form-label fw-bold">Review</label>
+            <div class="col-12 col-md-8">
+              <textarea class="form-control" name="ifReview" id="ifReview" rows="5" maxlength="225" placeholder="Review"
+                required oninput="hCheckLength(event)"></textarea>
+              <div>
+                <span id="ofReviewLength">0</span>/225
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <div class="offset-md-4 col-12 col-md-8">
+              <button type="submit" class="btn btn-success w-100">Add review</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer>
+    <%- include('partials/_footer') %>
+  </footer>
+  <!-- Global JS Settings -->
+  <%- include('partials/_meta_foot') %>
+  <script>
+    const hReviewSlider = (e) => {
+      document.getElementById("ofRating").innerHTML = ((ivRating) => {
+        let stars = "";
+        if (ivRating > 0) {
+          for (let i = 0; i < ivRating; i++) {
+            stars += `<i class="fa-solid fa-star-half-stroke fa-beat" style="color: var(--white);"></i>&nbsp;`
+          }
+        }
+        return ivRating > 0 ? stars : null
+      })(e.target.value)
+    };
+
+    const hCheckLength = (e) => {
+      document.getElementById("ofReviewLength").innerHTML = e.target.value.length
+    };
+  </script>
+</body>
+
+</html>

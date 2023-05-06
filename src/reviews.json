@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Nathanial Martinez",
+    "rating": 4.5,
+    "review_date": "2022-08-15T14:30:00Z",
+    "review": "Hirakana is a great app for learning hiragana characters. It's user-friendly and has interactive games and quizzes that make learning fun and engaging."
+  },
+  {
+    "name": "Emily Scott",
+    "rating": 3.2,
+    "review_date": "2022-01-30T19:45:00Z",
+    "review": "If you want to master hiragana characters, Hirakana is the app for you. The lessons are well-organized and easy to follow, making it perfect for beginners."
+  },
+  {
+    "name": "Jacob Ramirez",
+    "rating": 2.9,
+    "review_date": "2022-10-05T08:00:00Z",
+    "review": "Hirakana is a must-have app for anyone learning Japanese. The clear audio and visual cues make it easy to learn hiragana characters, and the app is perfect for beginners."
+  },
+  {
+    "name": "Avery Jones",
+    "rating": 4.8,
+    "review_date": "2022-07-20T12:15:30Z",
+    "review": "With Hirakana, learning hiragana characters is a breeze. The app has a simple interface and well-designed lessons that cover all the characters, making it perfect for beginners."
+  },
+  {
+    "name": "Mia Hernandez",
+    "rating": 3.7,
+    "review_date": "2022-12-31T23:59:59Z",
+    "review": "Hirakana is a top-rated app for learning hiragana. With interactive games and quizzes, it makes learning fun and engaging. The lessons are well-structured and easy to follow, perfect for beginners and advanced learners alike."
+  }
+]
